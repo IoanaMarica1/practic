@@ -63,7 +63,7 @@ public class ConsoleController {
         menu.put(1, new MenuItem("Counts + print drivers", this::option1));
 
         // 2
-        menu.put(2, new MenuItem("show tributes from district, that are alive", this::option2));
+        menu.put(2, new MenuItem("Filter Drivers", this::option2));
 
         // 3
         menu.put(3, new MenuItem("Sort tributes", this::option3));
@@ -105,6 +105,8 @@ public class ConsoleController {
      * 2)
      */
     private void option2() {
+        String d = readNonEmpty("District number: ");
+        driverService.filterDrivers(d);
 
     }
 

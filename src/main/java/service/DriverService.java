@@ -1,6 +1,7 @@
 package service;
 
 import model.Driver;
+import model.Status;
 import repo.AbstractRepoImpl;
 import repo.AbstractRepository;
 
@@ -30,6 +31,13 @@ public class DriverService {
 
     public void showDrivers(){
         driversRepo.findAll().stream()
+                .map(x->"[#"+x.getId()+"] "+x.getName()+" ("+x.getTeam()+") "+"-"+x.getStatus()+","+" skill="+x.getSkillLevel())
+                .forEach(System.out::println);
+    }
+
+    public void filterDrivers(String team){
+        driversRepo.findAll().stream()
+                .filter(x->x.getTeam().equals(team) && x.getStatus().equals(Status.ACTIVE))
                 .map(x->"[#"+x.getId()+"] "+x.getName()+" ("+x.getTeam()+") "+"-"+x.getStatus()+","+" skill="+x.getSkillLevel())
                 .forEach(System.out::println);
     }
