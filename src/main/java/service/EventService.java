@@ -27,4 +27,11 @@ public class EventService {
         long value = eventsRepo.count();
         System.out.println("Nr events: " + value+"\n");
     }
+    public void countTyp(){
+        eventsRepo.findAll().stream()
+                .collect(Collectors.groupingBy(Event::getTyp,Collectors.counting()))
+                .entrySet().stream()
+                .map(e->e.getKey()+"->"+e.getValue())
+                .forEach(System.out::println);
+    }
 }

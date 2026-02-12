@@ -78,7 +78,7 @@ public class ConsoleController {
         menu.put(6, new MenuItem("Ranking Top 5 by score", this::option6));
 
         // 7
-        menu.put(7, new MenuItem("Count Arena", this::option7));
+        menu.put(7, new MenuItem("Count Typ", this::option7));
     }
 
     private void printMenu() {
@@ -145,7 +145,7 @@ public class ConsoleController {
 //     * 7)
 //     */
     private void option7() {
-
+        eventService.countTyp();
 
 
     }
