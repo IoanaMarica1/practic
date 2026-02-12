@@ -58,5 +58,41 @@ public class DriverService {
             throw new RuntimeException(e);
         }
     }
+    public void computingPoints(PenaltiesService penaltiesService, EventService eventService){
+        System.out.println("Top 5 drivers: "+"\n");
+        record Ranking(String name, String team, Integer score){
+
+        }
+
+        driversRepo.findAll().stream()
+                .map(driver->{
+                    Integer totalP = penaltiesService.totalPenalties(driver.getId());
+                    Integer totalC = eventService.totalPoints(driver.getId());
+                    Integer score = totalC-totalP;
+                    return new Ranking(driver.getName(), driver.getTeam(), score);
+                })
+                 .sorted(Comparator.comparing(Ranking::score).reversed().thenComparing(Ranking::name))
+                .limit(5)
+                .forEach(e->System.out.printf("%s (%s) -> %d%n",e.name(),e.team(),e.score()));
+
+    }
+    public void top1(PenaltiesService penaltiesService, EventService eventService){
+        System.out.println("Winning team: ");
+        record Ranking(String name, String team, Integer score){
+
+        }
+
+        driversRepo.findAll().stream()
+                .map(driver->{
+                    Integer totalP = penaltiesService.totalPenalties(driver.getId());
+                    Integer totalC = eventService.totalPoints(driver.getId());
+                    Integer score = totalC-totalP;
+                    return new Ranking(driver.getName(), driver.getTeam(), score);
+                })
+                .sorted(Comparator.comparing(Ranking::score).reversed().thenComparing(Ranking::name))
+                .limit(1)
+                .forEach(e->System.out.printf("%s%n",e.team()));
+
+    }
 
 }

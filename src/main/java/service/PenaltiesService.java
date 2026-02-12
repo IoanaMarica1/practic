@@ -27,4 +27,11 @@ public class PenaltiesService {
         long value = penaltiessRepo.count();
         System.out.println("Nr penalties: " + value+"\n");
     }
+    public Integer totalPenalties(Integer id){
+        return penaltiessRepo.findAll()
+                .stream()
+                .filter(penalties -> penalties.getFahrerId().equals(id))
+                .mapToInt(Penalties::getSeconds)
+                .sum();
+    }
 }

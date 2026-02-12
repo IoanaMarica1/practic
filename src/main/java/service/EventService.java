@@ -49,4 +49,21 @@ public class EventService {
                 }).limit(5)
                 .forEach(System.out::println);
     }
+    public Integer totalPoints(Integer id){
+        return eventsRepo.findAll()
+                .stream()
+                .filter(x->x.getFahrerId().equals(id))
+                .mapToInt(e->{
+                    return switch(e.getTyp()){
+                        case OVERTAKE -> e.getBasePoints()+1;
+                        case FASTEST_LAP ->  e.getBasePoints()+2*(e.getLap()%3);
+                        case TRACK_LIMITS -> e.getBasePoints()-5;
+                        case COLLISION -> e.getBasePoints()-10-e.getLap();
+                        case PIT_STOP -> e.getLap()<=10 ? e.getBasePoints()+2 : e.getBasePoints();
+                    };
+                })
+                .sum();
+
+    }
+
 }

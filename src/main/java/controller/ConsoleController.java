@@ -138,7 +138,8 @@ public class ConsoleController {
 //     * 6)
 //     */
     private void option6() {
-        ;
+        driverService.computingPoints(penaltiesService,eventService);
+        driverService.top1(penaltiesService,eventService);
     }
     //
 //    /**
