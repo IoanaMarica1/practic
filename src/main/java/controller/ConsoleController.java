@@ -66,7 +66,7 @@ public class ConsoleController {
         menu.put(2, new MenuItem("Filter Drivers", this::option2));
 
         // 3
-        menu.put(3, new MenuItem("Sort tributes", this::option3));
+        menu.put(3, new MenuItem("Sort drivers", this::option3));
 
         // 4
         menu.put(4, new MenuItem("Sort tributes in file", this::option4));
@@ -114,7 +114,7 @@ public class ConsoleController {
      * 3)
      */
     private void option3() {
-
+        driverService.sortDrivers();
     }
 
     /**
