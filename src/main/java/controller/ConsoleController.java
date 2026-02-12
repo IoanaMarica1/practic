@@ -130,7 +130,7 @@ public class ConsoleController {
      * 5)
      */
     private void option5() {
-
+        eventService.countPoints();
 
     }
     //

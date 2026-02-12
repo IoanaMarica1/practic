@@ -34,4 +34,19 @@ public class EventService {
                 .map(e->e.getKey()+"->"+e.getValue())
                 .forEach(System.out::println);
     }
+    public void countPoints(){
+        eventsRepo.findAll().stream()
+                .sorted(Comparator.comparing(Event::getId))
+                .map(e->{
+                    Integer computingPoints = switch(e.getTyp()){
+                        case OVERTAKE -> e.getBasePoints()+1;
+                        case FASTEST_LAP ->  e.getBasePoints()+2*(e.getLap()%3);
+                        case TRACK_LIMITS -> e.getBasePoints()-5;
+                        case COLLISION -> e.getBasePoints()-10-e.getLap();
+                        case PIT_STOP -> e.getLap()<=10 ? e.getBasePoints()+2 : e.getBasePoints();
+                    };
+                    return String.format("Event "+e.getId()+"-> raw="+e.getBasePoints()+" ->computed="+computingPoints);
+                }).limit(5)
+                .forEach(System.out::println);
+    }
 }
