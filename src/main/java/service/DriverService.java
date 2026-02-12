@@ -47,4 +47,15 @@ public class DriverService {
                 .map(x->"["+x.getId()+"] "+x.getName()+" ("+x.getTeam()+") "+"-"+x.getStatus()+","+" skill="+x.getSkillLevel())
                 .forEach(System.out::println);
     }
+    public void fileSorted(){
+        try(PrintWriter writer = new PrintWriter(new FileWriter("drivers_sorted.txt") )) {
+            driversRepo.findAll().stream()
+                    .sorted(Comparator.comparing(Driver::getSkillLevel).reversed().thenComparing(Driver::getName))
+                    .map(x->"["+x.getId()+"] "+x.getName()+" ("+x.getTeam()+") "+"-"+x.getStatus()+","+" skill="+x.getSkillLevel())
+                    .forEach(writer::println);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

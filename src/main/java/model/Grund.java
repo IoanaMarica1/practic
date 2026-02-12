@@ -3,6 +3,6 @@ package model;
 public enum Grund {
     TRACK_LIMITS,
     COLLISION,
-    UNSAFE_REBASE,
+    UNSAFE_RELEASE,
     SPEEDING_PITLANE
 }

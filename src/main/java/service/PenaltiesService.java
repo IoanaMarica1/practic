@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 public class PenaltiesService {
-    Path path = Path.of("data/penaltiess.json");
+    Path path = Path.of("data/penalties.json");
 
     AbstractRepository<Penalties, Integer> penaltiessRepo =
             new AbstractRepoImpl<>(
